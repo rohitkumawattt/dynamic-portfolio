@@ -13,7 +13,7 @@ const app = express()
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://dynamic-portfolio-admin.onrender.com", "https://portfolio-rohit-kumawat.onrender.com", "http://localhost:5174"], // frontend port
+    origin: ["https://dynamic-portfolio-admin.onrender.com", "https://portfolio-rohit-kumawat.onrender.com", "http://localhost:5174","http://localhost:5173"], // frontend port
     credentials: true, // this will allow cookies to be sent
   })
 );

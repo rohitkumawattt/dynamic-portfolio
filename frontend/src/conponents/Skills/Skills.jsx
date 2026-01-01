@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SkillGraph from "./SkillGraph";
 import { useProfileContext } from "../../context/profileContext";
 const Skills = () => {
-  const [isSkillActive, setIsSkillActive] = useState("all skills");
+  const [isSkillActive, setIsSkillActive] = useState("All Skills");
   const { skills } = useProfileContext();
   const skillBar = [
     "All Skills",
@@ -46,7 +46,7 @@ const Skills = () => {
             Categorized Skills
           </h3>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-6 text-lg normal-color mt-3">
-            {isSkillActive === "all skills"
+            {isSkillActive === "All Skills"
               ? skills.map((skill) => (
                   <li key={skill._id}>
                     <span className="text-blue-600">&#10003;</span> {skill.name}
