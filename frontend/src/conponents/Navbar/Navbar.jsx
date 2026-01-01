@@ -5,6 +5,8 @@ import menu from "../../assets/menu.svg";
 import cross from "../../assets/cross.svg";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { masterTL } from "../../gsap/masterTimeline.js";
+
 import { useProfileContext } from "../../context/profileContext";
 
 
@@ -13,25 +15,24 @@ const Navbar = () => {
   const {user} = useProfileContext();
   useGSAP(() => {
     if(!user?.name) return;
-    const tl = gsap.timeline();
-    tl.from(".logo", {
+    masterTL.from(".logo", {
       y: -50,
       delay: 0.3,
       duration: 0.5,
       opacity: 0,
       ease: "back.out(1.4)",
     });
-    tl.from(".nav-items a", {
+    masterTL.from(".nav-items a", {
       y: -50,
       duration: 0.3,
       opacity: 0,
       ease: "back.out(2)",
       stagger: 0.1,
     });
-    tl.from(".resume-btn",{
+    masterTL.from(".resume-btn",{
       opacity:0,
     })
-  }, [user]);
+  }, { dependencies: [user?.name] });
   const tl2 = gsap.timeline();
   useGSAP(() => {
     tl2.to(".side-items", {

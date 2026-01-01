@@ -7,8 +7,8 @@ const Project = () => {
   const [projectSelected, setProjectSelected] = useState({});
   return (
     <>
-      <section id="projects" className="w-full min-h-[100vh]">
-        <h2 className="text-3xl font-bold text-center primary-color">
+      <section id="projects" className="w-full min-h-[100vh] border-t border-t-blue-100">
+        <h2 className="text-3xl font-bold text-center primary-color mt-3">
           My projects
         </h2>
         <div

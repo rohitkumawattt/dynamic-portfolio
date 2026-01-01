@@ -12,8 +12,8 @@ const Skills = () => {
     "Soft Skills",
   ];
   return (
-    <section id="skills" className="w-full min-h-[100vh]">
-      <h1 className="skill-title text-[30px] font-bold text-center primary-color">
+    <section id="skills" className="w-full min-h-[100vh] border-t border-t-blue-100">
+      <h1 className="skill-title text-[30px] font-bold text-center primary-color mt-3">
         Skills
       </h1>
       <div className="w-[90%] text-xl mx-auto mt-6 flex justify-center">

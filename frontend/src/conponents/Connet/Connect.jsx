@@ -48,13 +48,13 @@ const Connect = () => {
   };
   // The component structure remains highly similar to the HTML, utilizing standard dark-theme classes.
   return (
-    <section className="w-full min-h-[100vh]">
-      <h2 className="text-3xl font-bold text-center primary-color">
+    <section id="connect" className="w-full min-h-[100vh] border-t border-t-blue-100">
+      <h2 className="text-3xl font-bold text-center primary-color mt-3">
         Let's Connect
       </h2>
       <div className="md:flex md:space-x-12 py-8 px-4 md:px-10">
         {/* Left side (form div)  */}
-        <div id="connect" className="md:w-1/2 mb-12 md:mb-0">
+        <div className="md:w-1/2 mb-12 md:mb-0">
           <div className="bg-gray-800 p-8 md:p-10 rounded-xl shadow-2xl border border-gray-700 h-full">
             <h2 className="text-3xl font-bold mb-6 text-white">
               Send Me a Message
