@@ -11,9 +11,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const { user, profile } = useProfileContext();
   const introRef = useRef(null);
-  const [imgLoaded, setImgLoaded] = useState(false);
   useGSAP(() => {
-    if (!profile || !profile.about) return;
     const tl = gsap.timeline();
     tl.from(".profile-img", {
       scale: 0,
@@ -48,7 +46,7 @@ const Header = () => {
       opacity: 0,
       ease: "back.out(1.4)",
     });
-  }, [profile, imgLoaded]);
+  });
   return (
     <div
       id="home"
@@ -60,7 +58,6 @@ const Header = () => {
             className="w-full h-full rounded-full object-cover primary-border md:h-72"
             src={profile?.avatar?.url}
             alt="Rohit Kumawat"
-            onLoad={() => setImgLoaded(true)}
           />
         </div>
         <div className="w-full flex flex-col justify-center items-center gap-2 px-4 md:w-[50%]">
