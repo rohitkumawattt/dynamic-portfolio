@@ -10,7 +10,7 @@ import {
   PencilLine,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import { useEffect } from "react";
 import axios from "axios";
 const ProfileSetting = () => {

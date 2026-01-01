@@ -4,7 +4,7 @@ import ProjectDetail from "../components/ProjectDetails";
 import { Plus } from "lucide-react";
 import AddProject from "../components/AddProject";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import { SquarePen, Trash, MoveRight, RefreshCw } from "lucide-react";
 import toast from "react-hot-toast"; 
 const Projects = () => {

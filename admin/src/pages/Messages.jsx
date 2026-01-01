@@ -1,6 +1,6 @@
 import React ,{ useState } from "react";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContextuthContext";
 import { useEffect } from "react";
 import { RefreshCw } from "lucide-react";
 const Messages = () => {
