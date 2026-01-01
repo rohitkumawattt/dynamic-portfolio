@@ -12,6 +12,7 @@ const Navbar = () => {
   const [sideBar, setSideBar] = useState(false);
   const {user} = useProfileContext();
   useGSAP(() => {
+    if(!user?.name) return;
     const tl = gsap.timeline();
     tl.from(".logo", {
       y: -50,
@@ -30,7 +31,7 @@ const Navbar = () => {
     tl.from(".resume-btn",{
       opacity:0,
     })
-  });
+  }, [user]);
   const tl2 = gsap.timeline();
   useGSAP(() => {
     tl2.to(".side-items", {
