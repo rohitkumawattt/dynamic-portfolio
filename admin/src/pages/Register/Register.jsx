@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./register.css";
 import { Mail, Lock, User, CheckCircle, Eye, EyeOff } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/authContext";
 import { Link } from "react-router-dom"
 import toast from "react-hot-toast";
 import axios from "axios";

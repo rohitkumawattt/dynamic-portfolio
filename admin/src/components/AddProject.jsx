@@ -8,7 +8,7 @@ import {
   FileText,
 } from "lucide-react";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "@/context/authContext";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 

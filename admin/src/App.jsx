@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "@/context/authContext.jsx";
 import Dashboad from "./pages/Dashboad";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";

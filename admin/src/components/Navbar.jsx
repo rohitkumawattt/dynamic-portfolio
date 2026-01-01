@@ -4,7 +4,7 @@ import cross from "../assets/cross.svg";
 import Rohit from "../assets/rohit_image_copy.jpg";
 import { LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/authContext";
 import toast from "react-hot-toast";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 const Navbar = () => {

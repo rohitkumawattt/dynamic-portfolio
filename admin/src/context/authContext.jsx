@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const AuthContext = React.createContext(null);
 const baseApi = "https://dynamic-portfolio-backend-bfon.onrender.com"
+const AuthContext = React.createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
