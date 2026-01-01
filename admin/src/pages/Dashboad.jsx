@@ -3,7 +3,7 @@ import Rohit from "../assets/rohit_image.jpg";
 import ProjectDetail from "../components/ProjectDetails";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 import { SquarePen, MoveRight, RefreshCw } from "lucide-react";
 // import toast from "react-hot-toast";
 const Dashboad = () => {

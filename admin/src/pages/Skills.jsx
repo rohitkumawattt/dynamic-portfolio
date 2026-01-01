@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Plus, X, ChevronDown } from "lucide-react";
 import { useEffect } from "react";
 import axios from "axios";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
 const Skills = () => {
   const { baseApi, usertoken } = useAuth();
