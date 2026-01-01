@@ -15,7 +15,7 @@ const MainLayout = () => {
         </aside>
         {/* Rogit side  */}
         <div className="flex-1 p-2 flex flex-col min-h-0">
-          <div className="w-full h-full shadow-2xl shadow-blue-700 rounded-xl p-5 border border-blue-900 overflow-hidden">
+          <div className="w-full h-full shadow-2xl shadow-blue-700 rounded-xl p-5 border border-blue-900 overflow-y-auto">
             <Outlet />
           </div>
         </div>

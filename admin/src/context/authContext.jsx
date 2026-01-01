@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const baseApi = "https://dynamic-portfolio-backend-bfon.onrender.com"
+const baseApi = window.location.hostname === "localhost" ? "http://localhost:3000" : "https://dynamic-portfolio-backend-bfon.onrender.com"
 const AuthContext = React.createContext(null);
 
 export const AuthProvider = ({ children }) => {
