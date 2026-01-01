@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const AuthContext = React.createContext(null);
-const baseApi = window.location.hostname === "localhost"
-    ? "http://localhost:3000"
-    : "http://192.168.1.6:3000";
+const baseApi = "https://dynamic-portfolio-backend-bfon.onrender.com"
 
 export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);

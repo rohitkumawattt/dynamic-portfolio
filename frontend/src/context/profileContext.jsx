@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const baseApi = "http://localhost:3000";
+const baseApi = "https://dynamic-portfolio-backend-bfon.onrender.com";
 const userId = "6904ba5ef21e4dc41182e1ff";
 const profileContext = React.createContext(null);
 
