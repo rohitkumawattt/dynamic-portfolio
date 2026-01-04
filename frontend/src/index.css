@@ -44,3 +44,6 @@ body {
         border-radius: 10px;
     }
 }
+.preload-hidden {
+  visibility: hidden;
+}

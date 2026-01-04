@@ -121,7 +121,8 @@ const Connect = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 px-6 bg-[#9c85bd] text-gray-900 font-bold text-lg rounded-lg shadow-lg hover:bg-teal-400 transition duration-300 transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-teal-500 focus:ring-opacity-50"
+                disabled={!formData.name || !formData.email || !formData.message}
+                className={`w-full py-3 px-6 text-gray-900 font-bold text-lg rounded-lg shadow-lg  transition duration-300 transform  ${formData.name || formData.email || formData.message ? "bg-[#9c85bd] hover:bg-teal-400 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-teal-500 focus:ring-opacity-50" : "bg-gray-600 cursor-not-allowed"}`}
               >
                 {sending ? (
                   <>
@@ -132,6 +133,17 @@ const Connect = () => {
                   "Send Message"
                 )}
               </button>
+              {/* clear form button  */}
+              <div className="w-full flex justify-end">
+                <button
+                  type="button"
+                  disabled={!formData.name && !formData.email && !formData.message}
+                  onClick={() => setFormData({ name: "", email: "", message: "" })}
+                  className={`mt-4 px-4 py-2 bg-gray-600 normal-color rounded-lg shadow-md  transition duration-300 ${!formData.name && !formData.email && !formData.message ? "cursor-not-allowed" : "cursor-pointer hover:bg-gray-700"}`}
+                >
+                  Clear Form
+                </button>
+              </div>
             </form>
           </div>
         </div>

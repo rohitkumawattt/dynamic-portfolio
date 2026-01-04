@@ -48,7 +48,8 @@ const Navbar = () => {
     { to: "/projects", label: "Projects" },
     { to: "/skills", label: "Skills" },
     { to: "/messages", label: "Messages" },
-    { to: "/profile-setting", label: "Profile Setting" },
+    { to: "/feedback", label: "Feedback" },
+    { to: "/profile-setting", label: "Profile Setting" }, 
   ];
 
   return (

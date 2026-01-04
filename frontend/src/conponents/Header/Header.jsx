@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
-import "./header.css";
 import { CiLinkedin } from "react-icons/ci";
 import { FaGithub, FaInstagram } from "react-icons/fa";
 import { useGSAP } from "@gsap/react";
 import SplitType from "split-type";
+import gsap from "gsap";
 import { masterTL } from "../../gsap/masterTimeline.js";
 import { useProfileContext } from "../../context/profileContext";
 import { Link } from "react-router-dom";
@@ -15,6 +15,10 @@ const Header = () => {
   useGSAP(
     () => {
       if (!isReady || !imageLoaded || !introRef.current) return;
+      gsap.set(
+    [".profile-img", ".intro-title", ".about", ".socal-icons"],
+    { visibility: "visible" }
+  );
       // Split the text into lines
       const split = new SplitType(introRef.current, {
         types: "lines",
@@ -58,7 +62,7 @@ const Header = () => {
       className="w-full h-[100vh] flex justify-center items-start border-t border-t-blue-100  text-[#ffffffa8]"
     >
       <div className="w-full flex flex-col justify-start items-center gap-7 py-5 md:h-[550px] md:flex-row-reverse md:justify-evenly md:items-center">
-        <div className="profile-img w-36 h-36 flex justify-center items-center bg-cover bg-center md:w-72 md:h-72 primary-shadow">
+        <div className="profile-img preload-hidden w-36 h-36 flex justify-center items-center bg-cover bg-center md:w-72 md:h-72 primary-shadow">
           <img
             className="w-full h-full rounded-full object-cover primary-border md:h-72"
             src={profile?.avatar?.url}
@@ -67,7 +71,7 @@ const Header = () => {
           />
         </div>
         <div className="w-full flex flex-col justify-center items-center gap-2 px-4 md:w-[50%]">
-          <h1 className="intro-title normal-color text-2xl md:text-3xl">
+          <h1 className="intro-title preload-hidden normal-color text-2xl md:text-3xl">
             Hello, I'm
             <span className="font-bold primary-color">
               {" "}
@@ -76,11 +80,11 @@ const Header = () => {
           </h1>
           <p
             ref={introRef}
-            className="normal-color text-sm text-justify md:w-2xl md:text-lg"
+            className="about preload-hidden normal-color text-sm text-justify md:w-2xl md:text-lg"
           >
             {profile?.about}
           </p>
-          <div className="socal-icons flex gap-4 text-3xl text-white">
+          <div className="socal-icons preload-hidden flex gap-4 text-3xl text-white">
             <span>
               <Link to={profile?.socialLinks?.linkedin} target="true">
                 <CiLinkedin className="hover:scale-110 duration-300 cursor-pointer text-blue-600" />

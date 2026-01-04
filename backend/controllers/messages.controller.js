@@ -1,4 +1,3 @@
-import message from "../models/messages.model.js";
 import Message from "../models/messages.model.js";
 
 export const addMessage = async (req, res) => {
@@ -43,11 +42,17 @@ export const getMessages = async (req, res) =>{
         })
     }
 }
-// get message by id
+// get message by slug
 
 export const getMessageById = async (req, res) =>{
     try {
         const { slug } = req.params;
+        if(!slug){
+            return res.status(400).json({
+                success:false,
+                message:"Please provide feedback slug."
+            })
+        }
         const searchRegex = new RegExp(slug, 'i');
         const messages = await Message.find({
             $or: [
