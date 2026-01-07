@@ -11,7 +11,7 @@ const UpGoingBtn = () => {
     });
   return (
     <div>
-      <a href="#top" className="up-going-btn fixed bottom-10 right-10 bg-[#9c85bd] normal-color p-4 rounded-full">
+      <a href="#top" className="hidden up-going-btn fixed bottom-10 right-10 bg-[#9c85bd] normal-color p-4 rounded-full">
         <MoveUp />
       </a>
     </div>
