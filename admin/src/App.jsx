@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import { useAuth } from "@/context/authContext.jsx";
 import Dashboad from "./pages/Dashboad";
@@ -10,6 +9,7 @@ import Messages from "./pages/Messages";
 import ProfileSetting from "./pages/ProfileSetting";
 import MainLayout from "./layout/MainLayout";
 import Feedback from "./pages/Feedback";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const { isLogin, loading } = useAuth();
@@ -27,8 +27,8 @@ function App() {
         {/* Public routes  */}
         {!isLogin && (
           <>
-            <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             {/* If user tries to go anywhere else → redirect to login */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </>

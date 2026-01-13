@@ -12,6 +12,13 @@ const Header = () => {
   const { user, profile, isReady } = useProfileContext();
   const [imageLoaded, setImageLoaded] = useState(false);
   const introRef = useRef(null);
+
+  const optimizeCloudinaryUrl = (url) => {
+    if (!url) return "";
+    // URL mein '/upload/' ko dhund kar uske baad optimization parameters add karna
+    // f_auto: best format (WebP), q_auto: automatic quality, w_400: width 400px
+    return url.replace("/upload/", "/upload/f_auto,q_auto,w_400,c_fill/");
+  };
   useGSAP(
     () => {
       if (!isReady || !imageLoaded || !introRef.current) return;
@@ -65,8 +72,8 @@ const Header = () => {
         <div className="profile-img preload-hidden w-36 h-36 flex justify-center items-center bg-cover bg-center md:w-72 md:h-72 primary-shadow">
           <img
             className="w-full h-full rounded-full object-cover primary-border md:h-72"
-            src={profile?.avatar?.url}
-            alt="Rohit Kumawat"
+            src={optimizeCloudinaryUrl(profile?.avatar?.url)}
+            alt={profile?.name || "Profile"}
             onLoad={() => setImageLoaded(true)}
           />
         </div>

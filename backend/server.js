@@ -1,5 +1,5 @@
 import express from "express"
-import dotenv from "dotenv"
+import "dotenv/config";
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import connectDb from "./config/db.js";
@@ -9,7 +9,6 @@ import skillRoute from "./routes/skills.route.js";
 import userProfileRoute from "./routes/userProfile.route.js";
 import messageRouter from "./routes/messages.routes.js";
 import feedbackRouter from "./routes/feedback.route.js"
-dotenv.config({ path: "./.env" });
 const app = express()
 app.use(cookieParser());
 app.use(

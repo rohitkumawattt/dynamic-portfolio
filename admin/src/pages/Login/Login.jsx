@@ -4,9 +4,11 @@ import react, { useState } from "react";
 import { Mail, Lock, CheckCircle, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../../context/authContext";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { assets } from "../../assets/assets.js";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { login, baseApi } = useAuth();
@@ -20,6 +22,13 @@ const Login = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+  // Password Validation Logic
+  const validations = {
+    length: formData.password.length >= 8,
+    hasUpper: /[A-Z]/.test(formData.password),
+    hasNumber: /[0-9]/.test(formData.password),
+    hasSpecial: /[!@#$%^&*(),.?":{}|<>]/.test(formData.password),
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,12 +63,13 @@ const Login = () => {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 font-sans text-gray-100">
+    <div className="min-h-screen flex items-center justify-center p-4 font-sans">
       {/* Form Card */}
-      <div className="w-full max-w-md bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700">
-        <h1 className="text-3xl font-extrabold text-indigo-400 mb-6 text-center">
-          Welcome Back-Login
+      <div className="bg-slate-900/85 p-8 rounded-lg shadow-lg w-96 text-sm border border-white/20">
+        <h1 className="text-white text-2xl font-semibold text-center mb-4">
+          Login
         </h1>
+        <p className="text-center text-indigo-300 mb-6">Login to admin's account</p>
         {/* Success Message Area */}
         {isSubmitted && (
           <div
@@ -96,45 +106,36 @@ const Login = () => {
         {/* Form Structure */}
         <form onSubmit={handleSubmit} noValidate>
           {/* Email Field  */}
-          <div className="mb-4">
-            <div className="relative rounded-lg shadow-md">
+          <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-gray-700 ">
               {/* Left Icon */}
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <Mail className="h-5 w-5 text-gray-400" />
-              </div>
+              <img src={assets.mail_icon} alt="" className="w-3 h-3" />
               <input
                 id="email"
                 name="email"
                 type="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`w-full py-2 pl-10 pr-12 rounded-lg text-gray-100 bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 focus:ring-offset-gray-800 transition duration-150 ease-in-out`}
-                placeholder="Enter your email"
-              />
-            </div>
-          </div>
-          {/* Password Field  */}
-          <div className="mb-4">
-            <div className="relative rounded-lg shadow-md">
-              {/* Left Icon */}
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <Lock className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                id="password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                value={formData.password}
-                onChange={handleInputChange}
-                className={`w-full py-2 pl-10 pr-12 rounded-lg text-gray-100 bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 focus:ring-offset-gray-800 transition duration-150 ease-in-out`}
-                placeholder="Enter your password"
+                className="bg-transparent outline-none text-white w-full "
+                placeholder="email id"
                 required
               />
-              {/* Password Show/Hide Toggle Button */}
-              <button
-                type="button"
+          </div>
+          {/* Password Field  */}
+          <div className="relative mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-gray-700">
+            <img src={assets.lock_icon} alt="" className="w-3 h-3" />
+            <input
+            id="password"
+            name="password"
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="password"
+              className="bg-transparent outline-none text-white w-full"
+              required
+            />
+            <div
                 onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-indigo-400 transition duration-150"
+                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-indigo-400 transition duration-150 cursor-pointer"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (
@@ -142,12 +143,40 @@ const Login = () => {
                 ) : (
                   <EyeOff className="h-5 w-5" aria-hidden="true" />
                 )}
-              </button>
-            </div>
+              </div>
           </div>
+          {/* <div className="mb-4"> 
+            UI for showing password validation
+            {validations.length > 0 && (
+              <ul
+                className="mt-2 text-sm text-gray-400"
+                style={{ listStyle: "none", padding: 0 }}
+              >
+                <ValidationItem
+                  label="At least 8 characters"
+                  isValid={validations.length}
+                />
+                <ValidationItem
+                  label="One uppercase letter"
+                  isValid={validations.hasUpper}
+                />
+                <ValidationItem
+                  label="One number"
+                  isValid={validations.hasNumber}
+                />
+                <ValidationItem
+                  label="One special character (@#$!)"
+                  isValid={validations.hasSpecial}
+                />
+              </ul>
+            )}
+          </div>  */}
+          <p onClick={() => {navigate("/reset-password");}} className="mb-4 text-indigo-500 cursor-pointer">
+            Forgot Password?
+          </p>
           <button
             type="submit"
-            className="w-full mt-4 flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-lg text-lg font-bold text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400 focus:ring-offset-gray-800 transition duration-150 ease-in-out transform hover:scale-[1.01]"
+            className="w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer"
           >
             {isLoading ? (
               <>
@@ -159,22 +188,18 @@ const Login = () => {
             )}
           </button>
         </form>
-
-        {/* Mode Switcher */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-300">
-            Don't have an account?
-            <Link
-              to={"/register"}
-              className="ml-2 font-semibold text-indigo-400 hover:text-indigo-300 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded-md focus:ring-offset-gray-800"
-            >
-              Register
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   );
 };
+
+const ValidationItem = ({ label, isValid }) => (
+  <li
+    className="mb-1"
+    style={{ color: isValid ? "#10b981" : "#ef4444", fontSize: "14px" }}
+  >
+    {isValid ? "✅" : "❌"} {label}
+  </li>
+);
 
 export default Login;
