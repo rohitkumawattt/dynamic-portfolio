@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { assets } from "../assets/assets";
@@ -47,6 +47,7 @@ const ResetPassword = () => {
         toast.success(response.data.message);
         setIsEmailSent(true);
       }else{
+        console.log("ERROR ON SUBMIT EMAIL : ",response.data)
         toast.error(response.data.message);
       }
     } catch (error) {
