@@ -4,7 +4,7 @@ import axios from "axios";
 const baseApi =
   window.location.hostname === "localhost"
     ? "http://localhost:3000"
-    : "https://dynamic-portfolio-backend-bfon.onrender.com";
+    : "https://dynamic-portfolio-backend-694e.onrender.com";
 const userId = "6904ba5ef21e4dc41182e1ff";
 const profileContext = React.createContext(null);
 
