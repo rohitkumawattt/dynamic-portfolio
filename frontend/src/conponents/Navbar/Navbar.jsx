@@ -81,11 +81,9 @@ const Navbar = () => {
     <>
       <div id="top" className="z-50">
         <nav className="flex justify-between items-center py-3 px-10">
-          <div className="">
-            <h1 className="logo preload-hidden primary-color font-bold text-3xl cursor-pointer">
+            <h1 className="logo preload-hidden primary-color font-bold md:text-2xl sm-text-xl cursor-pointer">
               {user.name}
             </h1>
-          </div>
           <div className="hidden nav-items preload-hidden normal-color md:flex items-center gap-7 text-[18px]">
             <a className="nav-item" href="#home">
               Home
