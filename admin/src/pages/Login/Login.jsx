@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import "./login.css";
 import react, { useState } from "react";
 import { Mail, Lock, CheckCircle, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../../context/authContext";
@@ -37,24 +36,26 @@ const Login = () => {
       const response = await axios.post(
         `${baseApi}/api/users/login`,
         formData,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
       login(response.data.user, response.data.accessToken);
-      if (response.data.success === true) {
+      if (response.data.success) {
         toast.success("Login successful");
         setIsSuccess(true);
       } else {
+        toast.error(response.data.message);
         setIsSuccess(false);
       }
       SetMessage(response.data.message);
       setIsSubmitted(true);
       setTimeout(() => setIsSubmitted(false), 4000);
-      console.log(response.data);
     } catch (error) {
-      console.log(error.response?.data || error.message);
-      SetMessage(
-        error.response?.data?.message || "Something went wrong. Try again!"
-      );
+      console.error("Login Error Details:", error.response?.data);
+      const errorMessage = error.response?.data?.message || "Something went wrong";
+      toast.error(errorMessage);
+      SetMessage(errorMessage);
       setIsSubmitted(true);
       setTimeout(() => setIsSubmitted(false), 4000);
       setIsSuccess(false);
@@ -69,7 +70,9 @@ const Login = () => {
         <h1 className="text-white text-2xl font-semibold text-center mb-4">
           Login
         </h1>
-        <p className="text-center text-indigo-300 mb-6">Login to admin's account</p>
+        <p className="text-center text-indigo-300 mb-6">
+          Login to admin's account
+        </p>
         {/* Success Message Area */}
         {isSubmitted && (
           <div
@@ -107,25 +110,25 @@ const Login = () => {
         <form onSubmit={handleSubmit} noValidate>
           {/* Email Field  */}
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-gray-700 ">
-              {/* Left Icon */}
-              <img src={assets.mail_icon} alt="" className="w-3 h-3" />
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className="bg-transparent outline-none text-white w-full "
-                placeholder="email id"
-                required
-              />
+            {/* Left Icon */}
+            <img src={assets.mail_icon} alt="" className="w-3 h-3" />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="bg-transparent outline-none text-white w-full "
+              placeholder="email id"
+              required
+            />
           </div>
           {/* Password Field  */}
           <div className="relative mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-gray-700">
             <img src={assets.lock_icon} alt="" className="w-3 h-3" />
             <input
-            id="password"
-            name="password"
+              id="password"
+              name="password"
               type={showPassword ? "text" : "password"}
               value={formData.password}
               onChange={handleInputChange}
@@ -134,16 +137,16 @@ const Login = () => {
               required
             />
             <div
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-indigo-400 transition duration-150 cursor-pointer"
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? (
-                  <Eye className="h-5 w-5" aria-hidden="true" />
-                ) : (
-                  <EyeOff className="h-5 w-5" aria-hidden="true" />
-                )}
-              </div>
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-indigo-400 transition duration-150 cursor-pointer"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? (
+                <Eye className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <EyeOff className="h-5 w-5" aria-hidden="true" />
+              )}
+            </div>
           </div>
           {/* <div className="mb-4"> 
             UI for showing password validation
@@ -171,16 +174,21 @@ const Login = () => {
               </ul>
             )}
           </div>  */}
-          <p onClick={() => {navigate("/reset-password");}} className="mb-4 text-indigo-500 cursor-pointer">
+          <p
+            onClick={() => {
+              navigate("/reset-password");
+            }}
+            className="mb-4 text-indigo-500 cursor-pointer"
+          >
             Forgot Password?
           </p>
           <button
             type="submit"
-            className="w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer"
+            className="flex justify-center items-center w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer"
           >
             {isLoading ? (
               <>
-                <div className="loader mr-2"></div>
+                <div className="w-px loader mr-2"></div>
                 Loging...
               </>
             ) : (

@@ -22,12 +22,13 @@ const Dashboad = () => {
         withCredentials: true,
       });
       if (response.status === 200) {
-        console.log("Project details:", response.data);
+        // console.log("Project details:", response.data);
         setProjects(response.data.projects);
         setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching project:", error);
+      setLoading(false);
     }
   };
   const fetchSkills = async () => {
@@ -35,12 +36,14 @@ const Dashboad = () => {
     try {
       const response = await axios.get(`${baseApi}/api/skills`);
       if (response.status === 200) {
-        console.log("SKILLS FECTHING DATA : ", response.data);
+        // console.log("SKILLS FECTHING DATA : ", response.data);
         setSkills(response.data.skills);
         setLoading(false);
       }
     } catch (error) {
-      console.log("SKILLS FEATCHING ERROR : ", error.message);
+      console.error("SKILLS FEATCHING ERROR : ", error.message);
+    }finally{
+      setLoading(false);
     }
   };
   const getSkillColor = (category) => {

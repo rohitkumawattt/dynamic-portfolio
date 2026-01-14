@@ -6,6 +6,7 @@ import axios from "axios";
 import { useAuth } from "../context/authContext";
 const ResetPassword = () => {
   const { baseApi } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
   axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -37,20 +38,24 @@ const ResetPassword = () => {
 
   const onSubmitEmail = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(`${baseApi}/api/users/send-reset-otp`, {
         email,
       });
       if(response.data.success){
-        console.log("ON SUBMIT EMAIL : ",response.data)
+        // console.log("ON SUBMIT EMAIL : ",response.data)
         toast.success(response.data.message);
         setIsEmailSent(true);
+        setIsLoading(false);
       }else{
-        console.log("ERROR ON SUBMIT EMAIL : ",response.data)
+        // console.log("ERROR ON SUBMIT EMAIL : ",response)
         toast.error(response.data.message);
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error(error.response.data.message);
+      setIsLoading(false);
     }
   }
 
@@ -63,6 +68,7 @@ const ResetPassword = () => {
 
   const onSubmitNewPassword = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post(`${baseApi}/api/users/reset-password`, {
         email,
@@ -70,14 +76,17 @@ const ResetPassword = () => {
         newPassword,
       });
       if(response.data.success){
-        console.log("ON SUBMIT NEW PASSWORD : ",response.data);
+        // console.log("ON SUBMIT NEW PASSWORD : ",response.data);
         toast.success(response.data.message);
         navigate("/login");
+        setIsLoading(false);
       }else{
         toast.error(response.data.message);
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error(error.response.data.message);
+      setIsLoading(false);
     }
   }
   return (
@@ -104,8 +113,15 @@ const ResetPassword = () => {
               required
             />
           </div>
-          <button className="w-full py-2.5 rounded-full bg-indigo-900 text-white cursor-pointer">
-            Submit
+          <button className="flex justify-center items-center w-full py-2.5 rounded-full bg-indigo-900 text-white cursor-pointer">
+            {isLoading ? (
+              <>
+                <div className="w-0.5 loader mr-2"></div>
+                Submitting...
+              </>
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       )}
@@ -136,8 +152,15 @@ const ResetPassword = () => {
                 );
               })}
           </div>
-          <button className="w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer">
-            Submit
+          <button className="flex justify-center items-center w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer">
+            {isLoading ? (
+              <>
+                <div className="w-0.5 loader mr-2"></div>
+                Submitting...
+              </>
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       )}
@@ -163,8 +186,15 @@ const ResetPassword = () => {
               required
             />
           </div>
-          <button className="w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer">
-            Submit
+          <button className="flex justify-center items-center w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer">
+            {isLoading ? (
+              <>
+                <div className="w-0.5 loader mr-2"></div>
+                Submitting...
+              </>
+            ) : (
+              "Submit"
+            )}
           </button>
         </form>
       )}

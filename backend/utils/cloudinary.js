@@ -24,6 +24,7 @@ export const uploadToCloudinary = async (File) =>{
             resource_type:"auto"
         })
         // console.log("File is uploaded successfully : ", response);
+        //remove the file from local storage after uploading it to cloudinary
         fs.unlinkSync(File);
         return response 
     } catch (error) {

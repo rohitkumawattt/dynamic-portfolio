@@ -42,8 +42,8 @@ export const uploadAvatar = async (req, res) => {
         // If profile already had an avatar, delete the old avatar from Cloudinary
         if (profile.avatar?.public_id) {
             await deleteFromCloudinary(profile.avatar.public_id);
+            // console.log("image delete successfully")
         }
-
         // save avatar 
         profile.avatar = {
             url: uploaded.secure_url,

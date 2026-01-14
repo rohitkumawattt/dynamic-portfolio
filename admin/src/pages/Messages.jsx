@@ -22,9 +22,9 @@ const Messages = () => {
         setMessages(response.data.messages);
         setLoading(false);
       }
-      console.log("MESSAGES FETCHED : ", response.data.messages);
+      // console.log("MESSAGES FETCHED : ", response.data.messages);
     } catch (error) {
-      console.log("ERROR FETCHING MESSAGES : ", error);
+console.error("ERROR FETCHING MESSAGES : ", error);
       setLoading(false);
     }
   };
@@ -34,11 +34,11 @@ const Messages = () => {
       const response = await axios.get(`${baseApi}/api/messages/${slug}`);
       if(response.data.success){
         setMessages(response.data.messages)
-        console.log("FETCHED MSG BY ID : ", response.data.messages);
+        // console.log("FETCHED MSG BY ID : ", response.data.messages);
         setLoading(false);
       }
     } catch (error) {
-      console.log("FETCHED MSG BY ID ERROR : ", error);
+      console.error("FETCHED MSG BY ID ERROR : ", error);
       setLoading(false);
     }
   }

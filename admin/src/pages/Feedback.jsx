@@ -18,10 +18,10 @@ const Feedback = () => {
       if (response.data.success) {
         setFeedbacks(response.data.feedbacks);
         setLoading(false);
-        console.log("FEEDBACK FETCHED : ", response.data.feedbacks);
+        // console.log("FEEDBACK FETCHED : ", response.data.feedbacks);
       }
     } catch (error) {
-      console.log("ERROR FETCHING FEEDBACK : ", error);
+      console.error("ERROR FETCHING FEEDBACK : ", error);
       setLoading(false);
     }
   };
@@ -35,10 +35,10 @@ const Feedback = () => {
       if (response.data.success) {
         setFeedbacks(response.data.feedbacks);
         setLoading(false);
-        console.log("FETCHED FEEDBACK BY ID : ", response.data);
+        // console.log("FETCHED FEEDBACK BY ID : ", response.data);
       }
     } catch (error) {
-      console.log("FETCHED FEEDBACK BY ID ERROR : ", error);
+      console.error("FETCHED FEEDBACK BY ID ERROR : ", error);
       setLoading(false);
     }
   };

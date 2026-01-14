@@ -112,7 +112,7 @@ const AddProject = ({
           }
         );
         if (response.status === 201) {
-          console.log("Project details:", response);
+          // console.log("Project details:", response);
           toast.success("Project submitted successfully!");
         }else if (response.status === 400) {
           toast.error("project already exist!");

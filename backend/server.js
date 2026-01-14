@@ -1,5 +1,6 @@
 import express from "express"
-import "dotenv/config";
+import dotenv from "dotenv"
+dotenv.config({ path: './.env' });
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import connectDb from "./config/db.js";
@@ -9,8 +10,10 @@ import skillRoute from "./routes/skills.route.js";
 import userProfileRoute from "./routes/userProfile.route.js";
 import messageRouter from "./routes/messages.routes.js";
 import feedbackRouter from "./routes/feedback.route.js"
+import resumeRouter from "./routes/resume.route.js"
 const app = express()
 app.use(cookieParser());
+app.use(express.json())
 app.use(
   cors({
     origin: ["https://dynamic-portfolio-admin.onrender.com", "https://portfolio-rohit-kumawat.onrender.com", "http://localhost:5174","http://localhost:5173"], // frontend port
@@ -18,7 +21,6 @@ app.use(
   })
 );
 
-app.use(express.json())
 const port = process.env.PORT || 3000 // Default port to 3000 if not specified
 connectDb();
 app.get('/', (req, res) => {
@@ -36,6 +38,8 @@ app.use("/api/user-profile", userProfileRoute);
 app.use("/api/messages", messageRouter);
 // feedback router
 app.use("/api/feedback",feedbackRouter);
+// resume router 
+app.use("/api/resume",resumeRouter);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

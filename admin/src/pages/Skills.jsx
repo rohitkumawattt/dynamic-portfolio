@@ -19,12 +19,12 @@ const Skills = () => {
     try {
       const response = await axios.get(`${baseApi}/api/skills`);
       if (response.status === 200) {
-        console.log("SKILLS FECTHING DATA : ", response.data);
+        // console.log("SKILLS FECTHING DATA : ", response.data);
         setSkills(response.data.skills);
         setLoading(false);
       }
     } catch (error) {
-      console.log("SKILLS FEATCHING ERROR : ", error.message);
+      console.error("SKILLS FEATCHING ERROR : ", error.message);
     }
   };
   const handleInputChange = (e) => {
@@ -43,7 +43,7 @@ const Skills = () => {
           Authorization: `Bearer ${usertoken}`,
         },
       });
-      console.log("SKILLS CREATION RESPONSE : ", response.data);
+      // console.log("SKILLS CREATION RESPONSE : ", response.data);
       if (response.status === 200) {
         setIsOpen(false);
         toast.success("Skill created successfully!");

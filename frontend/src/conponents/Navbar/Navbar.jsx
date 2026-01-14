@@ -104,15 +104,18 @@ const Navbar = () => {
             </a>
             <div className="resume-btn preload-hidden">
               <button
+                onClick={() => {
+                  alert("Resume will update soon!");
+                }}
                 className="bg-[#9c85bd] text-white px-4 py-2 rounded-lg cursor-pointer"
                 type="button"
               >
                 <a
-                  href="frontend\src\assets\Rohit-Kumawat-Resume.docx"
-                  download="Rohit-Kumawat-Resume.docx"
-                >
-                  Resume
-                </a>
+                href="#"
+                className="line-through"
+              >
+                Resume
+              </a>
               </button>
             </div>
           </div>
@@ -147,16 +150,19 @@ const Navbar = () => {
             Let's Connect
           </a>
           <a className="primary-color" href="#feedback">
-           Rate Us
+            Rate Us
           </a>
           <div className="resume-btn sidebar-item">
             <button
+              onClick={() => {
+                alert("Resume will update soon!");
+              }}
               className="bg-[#344582] side-resume-btn text-white px-4 py-2 rounded-lg cursor-pointer"
               type="button"
             >
               <a
-                href="frontend\src\assets\Rohit-Kumawat-Resume.docx"
-                download="Rohit-Kumawat-Resume.docx"
+                href="#"
+                className="line-through"
               >
                 Resume
               </a>

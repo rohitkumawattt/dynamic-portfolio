@@ -83,7 +83,7 @@ export const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid password",
+                message: "Invalid email or password",
                 password
             })
         }
@@ -279,14 +279,14 @@ export const sendResetOtp = async (req, res) => {
             // text: `Your OTP is ${otp} for resetting your password.`,
             html:PASSWORD_RESET_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email),
         }
-        await transporter.sendMail(mailOption);
+        const info = await transporter.sendMail(mailOption);
         return res.status(200).json({
             success: true,
             message: "OTP sent to your email",
         })
 
     } catch (error) {
-        console.log("Error in sendResetOtp : ",error)
+        // console.error("Nodemailer Error Details:", error);
         return res.status(500).json({
             success: false,
             message: error.message,

@@ -22,12 +22,14 @@ const Projects = () => {
         withCredentials: true,
       });
       if (response.status === 200) {
-        console.log("Project details:", response.data);
+        // console.log("Project details:", response.data);
         setProjects(response.data.projects);
         setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching project:", error);
+    }finally{
+      setLoading(false);
     }
   };
   const handleCreateProjectForm = () => {

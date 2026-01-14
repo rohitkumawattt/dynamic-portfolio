@@ -34,7 +34,6 @@ const Navbar = () => {
   };
   // Close sidebar when clicking outside
   useEffect(() => {
-    console.log();
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setIsOpen(false);

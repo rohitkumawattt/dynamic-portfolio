@@ -41,7 +41,7 @@ const ProfileSetting = () => {
         }
       );
       setUserProfile(response.data.profile[0]);
-      console.log("USER PROFILE FETCHED:", response.data.profile[0]);
+      // console.log("USER PROFILE FETCHED:", response.data.profile[0]);
       setAvatar(response.data.profile[0].avatar.url);
       setAbout(response.data.profile[0].about || "");
       setSocialLinks({
@@ -74,7 +74,7 @@ const ProfileSetting = () => {
       );
       if (response.data.success) {
         isUploading(false);
-        console.log("Uploaded image URL:", response.data.avatar);
+        // console.log("Uploaded image URL:", response.data.avatar);
         toast.success("Profile picture updated!");
       }
     } catch (error) {
@@ -86,7 +86,7 @@ const ProfileSetting = () => {
   const handleSave = async () => {
     if (userName.trim() !== "") {
       setUserName(userName);
-      console.log("Username saved to state:", userName);
+      // console.log("Username saved to state:", userName);
       setIsEdit(false);
     }
   };
@@ -107,7 +107,7 @@ const ProfileSetting = () => {
           },
         }
       );
-      console.log("USER ABOUT: ", response.data);
+      // console.log("USER ABOUT: ", response.data);
       setIsAboutEdit(false);
     } catch (error) {
       console.error("ERROR IN USER ABOUT SAVING:", error);
@@ -125,7 +125,7 @@ const ProfileSetting = () => {
           },
         }
       );
-      console.log("SOCIAL LINKS UPDATED:", response.data);
+      // console.log("SOCIAL LINKS UPDATED:", response.data);
       setEditField(null);
       toast.success("Social links updated!");
     } catch (error) {
