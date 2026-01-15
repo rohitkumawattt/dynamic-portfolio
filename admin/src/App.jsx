@@ -9,7 +9,6 @@ import Messages from "./pages/Messages";
 import ProfileSetting from "./pages/ProfileSetting";
 import MainLayout from "./layout/MainLayout";
 import Feedback from "./pages/Feedback";
-import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const { isLogin, loading } = useAuth();
@@ -28,7 +27,6 @@ function App() {
         {!isLogin && (
           <>
             <Route path="/login" element={<Login />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
             {/* If user tries to go anywhere else → redirect to login */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </>

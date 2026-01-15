@@ -60,7 +60,7 @@ const Navbar = () => {
             alt="Rohit Kumawat"
             className="w-12 h-12 hidden md:block rounded-full centre no bg-repeat bg-cover"
           />
-          <h1 className="logo primary-color font-bold text-3xl cursor-pointer">
+          <h1 className="logo primary-color font-bold md:text-2xl sm-text-xl cursor-pointer">
             {user?.name || "User"}
           </h1>
         </div>

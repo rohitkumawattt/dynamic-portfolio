@@ -174,14 +174,6 @@ const Login = () => {
               </ul>
             )}
           </div>  */}
-          <p
-            onClick={() => {
-              navigate("/reset-password");
-            }}
-            className="mb-4 text-indigo-500 cursor-pointer"
-          >
-            Forgot Password?
-          </p>
           <button
             type="submit"
             className="flex justify-center items-center w-full py-3 rounded-full bg-indigo-900 text-white cursor-pointer"
