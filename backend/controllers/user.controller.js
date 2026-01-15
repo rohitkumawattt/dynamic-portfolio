@@ -271,7 +271,6 @@ export const sendResetOtp = async (req, res) => {
         user.resetOtp = otp;
         user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
         await user.save();
-
         const mailOption = {
             from: process.env.SENDER_EMAIL,
             to: user.email,

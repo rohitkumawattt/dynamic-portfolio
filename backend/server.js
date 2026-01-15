@@ -16,8 +16,8 @@ app.use(cookieParser());
 app.use(express.json())
 app.use(
   cors({
-    origin: ["*"], // frontend port
-    // credentials: true, // this will allow cookies to be sent
+    origin: true, // frontend port
+    credentials: true, // this will allow cookies to be sent
   })
 );
 
