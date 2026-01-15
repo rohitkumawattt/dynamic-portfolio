@@ -251,49 +251,131 @@ export const isAuthenticated = async (req, res) => {
 }
 
 // send password reset OTP
-export const sendResetOtp = async (req, res) => {
-    const { email } = req.body;
-    if (!email) {
-        return res.status(400).json({
-            success: false,
-            message: "Missing email",
-        })
-    }
-    try {
-        const user = await userModel.findOne({email});
-        if(!user){
-            return res.status(404).json({
-                success: false,
-                message: "User not found",
-            })
-        }
-        const otp = String(Math.floor(100000 + Math.random() * 900000));
-        user.resetOtp = otp;
-        user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
-        await user.save();
-        const mailOption = {
-            from: process.env.SENDER_EMAIL,
-            to: user.email,
-            subject: "Password Reset OTP",
-            // text: `Your OTP is ${otp} for resetting your password.`,
-            html:PASSWORD_RESET_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email),
-        }
-        console.log("EMAIL:", process.env.SENDER_EMAIL);
-        const info = await transporter.sendMail(mailOption);
-        return res.status(200).json({
-            success: true,
-            message: "OTP sent to your email",
-        })
+// export const sendResetOtp = async (req, res) => {
+//     const { email } = req.body;
+//     if (!email) {
+//         return res.status(400).json({
+//             success: false,
+//             message: "Missing email",
+//         })
+//     }
+//     try {
+//         const user = await userModel.findOne({email});
+//         if(!user){
+//             return res.status(404).json({
+//                 success: false,
+//                 message: "User not found",
+//             })
+//         }
+//         const otp = String(Math.floor(100000 + Math.random() * 900000));
+//         user.resetOtp = otp;
+//         user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
+//         await user.save();
+//         const mailOption = {
+//             from: process.env.SENDER_EMAIL,
+//             to: user.email,
+//             subject: "Password Reset OTP",
+//             // text: `Your OTP is ${otp} for resetting your password.`,
+//             html:PASSWORD_RESET_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email),
+//         }
+//         console.log("EMAIL:", process.env.SENDER_EMAIL);
+//         const info = await transporter.sendMail(mailOption);
+//         return res.status(200).json({
+//             success: true,
+//             message: "OTP sent to your email",
+//         })
 
-    } catch (error) {
-        // console.error("Nodemailer Error Details:", error);
-        return res.status(500).json({
-            success: false,
-            message: error.message,
-            error:error
-        })
+//     } catch (error) {
+//         // console.error("Nodemailer Error Details:", error);
+//         return res.status(500).json({
+//             success: false,
+//             message: error.message,
+//             error:error
+//         })
+//     }
+// }
+
+
+
+export const sendResetOtp = async (req, res) => {
+  console.log("➡️ sendResetOtp API HIT");
+
+  const { email } = req.body;
+  console.log("📩 Email received:", email);
+
+  if (!email) {
+    console.log("❌ Email missing in request body");
+    return res.status(400).json({
+      success: false,
+      message: "Missing email",
+    });
+  }
+
+  try {
+    console.log("🔍 Searching user in DB...");
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      console.log("❌ User not found:", email);
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     }
-}
+
+    console.log("✅ User found:", user.email);
+
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    console.log("🔢 Generated OTP:", otp);
+
+    user.resetOtp = otp;
+    user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
+
+    console.log("💾 Saving OTP to DB...");
+    await user.save();
+    console.log("✅ OTP saved successfully");
+
+    console.log("📧 Preparing email...");
+    console.log("📤 Sender Email:", process.env.SENDER_EMAIL);
+    console.log("📥 Receiver Email:", user.email);
+
+    if (!process.env.SENDER_EMAIL) {
+      console.log("❌ SENDER_EMAIL is undefined");
+    }
+
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.log("❌ Brevo SMTP credentials missing");
+    }
+
+    const mailOption = {
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: "Password Reset OTP",
+      html: PASSWORD_RESET_TEMPLATE
+        .replace("{{otp}}", otp)
+        .replace("{{email}}", user.email),
+    };
+
+    console.log("🚀 Sending email via Brevo...");
+    const info = await transporter.sendMail(mailOption);
+    console.log("✅ Email sent successfully:", info.messageId);
+
+    return res.status(200).json({
+      success: true,
+      message: "OTP sent to your email",
+    });
+
+  } catch (error) {
+    console.error("🔥 SEND RESET OTP ERROR ↓↓↓");
+    console.error(error);
+
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 
 // reset user password 
 export const resetPassword = async (req, res) => {
