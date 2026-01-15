@@ -107,26 +107,13 @@ const Navbar = () => {
               </Link>
             ))}
           </ul>
-          <div className="resume-btn sidebar-item flex items-center justify-evenly">
             <button
               onClick={confirmLogOut}
-              className="flex items-center justify-center px-4 py-2 rounded-lg text-white bg-red-700 hover:bg-red-600 hover:text-white transition duration-200 ease-in-out cursor-pointer"
+              className="w-full flex items-center justify-center px-4 py-2 rounded-lg text-white bg-red-700 hover:bg-red-600 hover:text-white transition duration-200 ease-in-out cursor-pointer"
             >
               <LogOut className="w-5 h-5 mr-1" />
               Logout
             </button>
-            <button
-              className="bg-[#344582] side-resume-btn text-white px-4 py-2 rounded-lg cursor-pointer"
-              type="button"
-            >
-              <a
-                href="frontend\src\assets\Rohit-Kumawat-Resume.docx"
-                download="Rohit-Kumawat-Resume.docx"
-              >
-                Resume
-              </a>
-            </button>
-          </div>
         </div>
       )}
     </div>
