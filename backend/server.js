@@ -16,8 +16,8 @@ app.use(cookieParser());
 app.use(express.json())
 app.use(
   cors({
-    origin: ["https://admin-rohit.onrender.com", "https://rohit-kumawat.onrender.com", "http://localhost:5174","http://localhost:5173"], // frontend port
-    credentials: true, // this will allow cookies to be sent
+    origin: ["*"], // frontend port
+    // credentials: true, // this will allow cookies to be sent
   })
 );
 
