@@ -336,10 +336,10 @@ export const sendResetOtp = async (req, res) => {
     console.log("✅ OTP saved successfully");
 
     console.log("📧 Preparing email...");
-    console.log("📤 Sender Email:", process.env.SENDER_EMAIL);
+    console.log("📤 Sender Email:", process.env.SMTP_USER);
     console.log("📥 Receiver Email:", user.email);
 
-    if (!process.env.SENDER_EMAIL) {
+    if (!process.env.SMTP_USER) {
       console.log("❌ SENDER_EMAIL is undefined");
     }
 
@@ -348,7 +348,7 @@ export const sendResetOtp = async (req, res) => {
     }
 
     const mailOption = {
-      from: process.env.SENDER_EMAIL,
+      from: process.env.SMTP_USER,
       to: user.email,
       subject: "Password Reset OTP",
       html: PASSWORD_RESET_TEMPLATE
