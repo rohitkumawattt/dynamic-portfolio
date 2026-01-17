@@ -79,8 +79,7 @@ export const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({
                 success: false,
-                message: "Invalid email or password",
-                password
+                message: "Invalid email or password"
             })
         }
         const accessToken = jwt.sign({ userId: userLogin._id }, process.env.JWT_ACCESS_SECREAT, { expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN });
@@ -140,6 +139,93 @@ export const refereshAccessToken = async (req, res) => {
         })
     }
 }
+
+
+
+// export const sendResetOtp = async (req, res) => {
+//     const { email } = req.body;
+//     if (!email) {
+//         return res.status(400).json({
+//             success: false,
+//             message: "Missing email",
+//         })
+//     }
+//     try {
+//         const user = await userModel.findOne({email});
+//         if(!user){
+//             return res.status(404).json({
+//                 success: false,
+//                 message: "User not found",
+//             })
+//         }
+//         const otp = String(Math.floor(100000 + Math.random() * 900000));
+//         user.resetOtp = otp;
+//         user.resetOtpExpireAt = Date.now() + 15 * 60 * 1000;
+//         await user.save();
+//         return res.status(200).json({
+//             success: true,
+//             message: "OTP sent to your email",
+//         })
+
+//     } catch (error) {
+//         return res.status(500).json({
+//             success: false,
+//             message: error.message,
+//         })
+//     }
+// }
+
+// // reset user password 
+// export const resetPassword = async (req, res) => {
+//     const { email, otp, newPassword } = req.body;
+//     if (!email || !otp || !newPassword) {
+//         return res.status(400).json({
+//             success: false,
+//             message: "email, otp, new password are required",
+//         })
+//     }
+//     try {
+//         const user = await userModel.findOne({email});
+//         if(!user){
+//             return res.status(404).json({
+//                 success: false,
+//                 message: "User not found",
+//             })
+//         }
+//         if(user.resetOtp !== otp || user.resetOtp === ""){
+//             return res.status(400).json({
+//                 success: false,
+//                 message: "Invalid OTP",
+//             })
+//         }
+//         if(user.resetOtpExpireAt < Date.now()){
+//             return res.status(400).json({
+//                 success: false,
+//                 message: "OTP expired",
+//             })
+//         }
+//         const hashedPassword = await bcrypt.hash(newPassword, 10);
+//         user.password = hashedPassword;
+//         user.resetOtp = "";
+//         user.resetOtpExpireAt = 0;
+//         await user.save();
+//         return res.status(200).json({
+//             success: true,
+//             message: "Password has been reset successfully",
+//         })
+//     } catch (error) {
+//         return res.status(500).json({
+//             success: false,
+//             message: error.message,
+//         })
+//     }
+// }
+
+
+
+
+
+
 
 // user getMe
 export const getMe = async (req, res) => {

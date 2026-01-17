@@ -7,5 +7,8 @@ router.post("/register",register);
 router.post("/login",login);
 router.get("/me",protect,getMe);
 router.post("/refresh-access-token",refereshAccessToken);
+// router.post('/send-reset-otp' , sendResetOtp);
+// router.post('/reset-password' , resetPassword);
+
 
 export default router;
